@@ -1,3 +1,8 @@
+<?php 
+if (!isset($_GET['name'])) {
+    header("Location: page.php?name=1");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +12,6 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="page.php" method="GET">
-        <input type="number" name="name">
-        <input type="submit">
-    </form>
+    
 </body>
 </html>
