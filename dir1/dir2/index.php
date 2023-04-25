@@ -3,15 +3,18 @@
 $host = "localhost";
 $user = "root";
 $pass = "root";
-$name = "test";
+$name = "exerice";
 
 $link = mysqli_connect($host, $user, $pass, $name);
-mysqli_query($link, "SET NAMES 'utf8");
+mysqli_query($link, "SET NAMES 'utf8'");
 
 $query = "SELECT * FROM users";
 $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
 for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
+$path = "test.php";
+$param = "success";
+header("Location: $path?$param");
 ?>
 <!DOCTYPE html>
 <html lang="en">
