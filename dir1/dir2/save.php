@@ -17,4 +17,8 @@
     mysqli_query($link, $query) or die(mysqli_error($link));
 
     echo "User changed successfully";
+
+    $homePath = "index.php";
+
+    header("Location: $homePath");
 ?>
