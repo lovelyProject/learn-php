@@ -1,10 +1,10 @@
 <?php 
     session_start();
 
-    $_SESSION['flash'] = "NVTK";
+    $_SESSION['flash'][] = "NVTK";
 
-    header("Location: save.php");
-    
+    header("Location: new.php");
+
 ?>
 
 <!DOCTYPE html>

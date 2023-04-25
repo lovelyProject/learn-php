@@ -1,7 +1,10 @@
 <?php 
 session_start();
-if (isset($_SESSION['flash'])) {
-    echo $_SESSION['flash'];
+if (!empty($_SESSION['flash'])) {
+    foreach($_SESSION['flash'] as $flash) {
+        echo $flash;
+    }
+
     unset($_SESSION['flash']);
 }
 
