@@ -1,21 +1,12 @@
-<meta charset="UTF-8">
-<?php
-$host = "localhost";
-$user = "root";
-$pass = "root";
-$name = "exerice";
+<?php 
+    session_start();
 
-$link = mysqli_connect($host, $user, $pass, $name);
-mysqli_query($link, "SET NAMES 'utf8'");
+    $_SESSION['flash'] = "NVTK";
 
-$query = "SELECT * FROM users";
-$result = mysqli_query($link, $query) or die(mysqli_error($link));
-
-for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
-$path = "test.php";
-$param = "success";
-header("Location: $path?$param");
+    header("Location: save.php");
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,15 +16,6 @@ header("Location: $path?$param");
     <title>Document</title>
 </head>
 <body>
-   <table>
-   <?php foreach($data as $row) : ?>
-    <?= "<tr>" ?>
-    <?= "<td>$row[name]</td>" ?>
-    <?= "<td>$row[age]</td>" ?>
-    <?= "<td>$row[salary]</td>" ?>
-    <?= "<td><a href='edit.php?id=$row[id]'>редактировать пользователя</a></td>" ?>
-    <?= "</tr>" ?>
-    <?php endforeach ?>
-   </table>
+    
 </body>
 </html>
