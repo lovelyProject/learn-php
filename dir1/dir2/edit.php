@@ -14,6 +14,7 @@
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
         $user = mysqli_fetch_assoc($result);
+        
     }
 ?>
 <!DOCTYPE html>

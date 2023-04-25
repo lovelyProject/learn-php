@@ -11,7 +11,7 @@ mysqli_query($link, "SET NAMES 'utf8");
 $query = "SELECT * FROM users";
 $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
-
+for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,15 @@ $result = mysqli_query($link, $query) or die(mysqli_error($link));
     <title>Document</title>
 </head>
 <body>
-    
+   <table>
+   <?php foreach($data as $row) : ?>
+    <?= "<tr>" ?>
+    <?= "<td>$row[name]</td>" ?>
+    <?= "<td>$row[age]</td>" ?>
+    <?= "<td>$row[salary]</td>" ?>
+    <?= "<td><a href='edit.php?id=$row[id]'>редактировать пользователя</a></td>" ?>
+    <?= "</tr>" ?>
+    <?php endforeach ?>
+   </table>
 </body>
 </html>
