@@ -2,7 +2,7 @@
     session_start();
 
     if (!empty($_POST['login']) and !empty($_POST['password'])) {
-        
+        if ($_POST['confirm'] === $_POST['password']) {
 
         $host = 'localhost';
         $user = "root";
@@ -14,6 +14,7 @@
 
         $login = $_POST['login'];
         $password = $_POST['password'];
+        $confirm = $_POST['confirm'];
         $email = $_POST['email'];
         $date = $_POST['date'];
         $now = date("Y-m-d");
@@ -22,8 +23,17 @@
         
         $_SESSION['login'] = $login;
         $_SESSION['auth'] = true;
+
+        $id = mysqli_insert_id($link);
+        $_SESSION['id'] = $id;
+
+        echo $id;
         echo "Регистрация прошла успешно";
+    } else {
+        echo "Пароли не совпадают";
     }
+
+}
 
 ?>
 
@@ -39,6 +49,7 @@
 <form action="" method="POST">
 	<input name="login" type="text" placeholder="login">
 	<input name="password" type="password" placeholder="password">
+	<input name="confirm" type="password" placeholder="confirm password">
     <input type="date" placeholder="дата рождения" name="date">
     <input type="email" name="email" placeholder="email">
 	<input type="submit">
