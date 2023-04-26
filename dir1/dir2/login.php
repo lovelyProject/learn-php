@@ -40,7 +40,7 @@ function makeFoundation() {
 
         if ($flag) {
             echo "Успешная авторизация";
-            $_SESSION['flash'] = "Успешная авторизация";
+            $_SESSION['auth'] = true;
             header("Location: index.php");
         } else {
             makeFoundation();
