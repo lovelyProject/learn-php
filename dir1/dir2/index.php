@@ -1,29 +1,5 @@
 <?php 
     session_start();
-    var_dump($_POST);
-    if (!empty($_POST)) {
-        $formName = $_POST['name'];
-        $formAge = $_POST['age'];
-        $formSalary = $_POST['salary'];
-
-        if (is_int((int)$formAge) && is_int((int)$formSalary) && is_string((string)$formName)) {
-            $host = "localhost";
-            $user = "root";
-            $pass = "root";
-            $name = "test";
-
-            $link = mysqli_connect($host, $user, $pass, $name);
-            mysqli_query($link, "SET NAMES 'utf8'");
-
-            $query = "INSERT INTO users (name, age, salary) VALUES ('$formName', '$formAge', '$formSalary')";
-            $result = mysqli_query($link, $query);
-
-            $_SESSION['flash'] = "форма прошла валидацию и успешно сохранена";
-            // header("Location: index.php");
-        } else {
-            $_SESSION['flash'] =  "форма не прошла валидацию";
-        }
-    }
 
     if (isset($_SESSION['flash'])) {
         echo $_SESSION['flash'];
