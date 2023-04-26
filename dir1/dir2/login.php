@@ -41,6 +41,7 @@ function makeFoundation() {
         if ($flag) {
             echo "Успешная авторизация";
             $_SESSION['auth'] = true;
+            $_SESSION['login'] = $user['login'];
             header("Location: index.php");
         } else {
             makeFoundation();

@@ -14,6 +14,7 @@
     <?php if (isset($_SESSION['auth'])) : ?>
 
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi, sapiente impedit voluptate, esse delectus obcaecati sed perferendis molestias necessitatibus sunt rerum. Minus laudantium, quidem perferendis perspiciatis, et rerum cum aut quo illo eum nobis architecto vel officia dolorem quasi porro hic harum quis vero sit consectetur. Numquam eum facilis quaerat?</p>
+    <?= $_SESSION['login'] ?>
     <?php else : ?>
         <form method="POST" action="index.php">
         <input type="text" name="name" placeholder="name" value="<?= $_POST['name']?>">
