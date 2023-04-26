@@ -1,7 +1,7 @@
 <?php 
     session_start();
 
-    if (!empty($_POST['login']) and !empty($_POST['password'])) {
+    if (!empty($_POST['login']) and !empty($_POST['password']) and strlen($_POST['login']) > 0 and preg_match("/^[a-zA-Z0-9\-_]+$/", $_POST['login'])) {
         if ($_POST['confirm'] === $_POST['password']) {
 
         $host = 'localhost';
@@ -44,6 +44,8 @@
         echo "Пароли не совпадают";
     }
 
+} else {
+    echo "Неверный логин либо пароль";
 }
 
 ?>
