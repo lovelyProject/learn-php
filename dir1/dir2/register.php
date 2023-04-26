@@ -8,27 +8,38 @@
         $user = "root";
         $password = "root";
         $name = "test";
-
+        
         $link = mysqli_connect($host, $user, $password, $name);
         mysqli_query($link, "SET NAMES 'utf8'");
-
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        $confirm = $_POST['confirm'];
-        $email = $_POST['email'];
-        $date = $_POST['date'];
-        $now = date("Y-m-d");
-        $query = "INSERT INTO logs (login, pass, email, date, created_at) VALUES ('$login', '$password', '$email', '$date', '$now')";
-        mysqli_query($link, $query) or die(mysqli_error($link));
         
-        $_SESSION['login'] = $login;
-        $_SESSION['auth'] = true;
+        $login = $_POST['login'];
+        $query = "SELECT * FROM logs WHERE login = '$login'";
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        
+        $user = mysqli_fetch_assoc($result);
+        
+        if (empty($user)) {
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $confirm = $_POST['confirm'];
+            $email = $_POST['email'];
+            $date = $_POST['date'];
+            $now = date("Y-m-d");
+            $query = "INSERT INTO logs (login, pass, email, date, created_at) VALUES ('$login', '$password', '$email', '$date', '$now')";
+            mysqli_query($link, $query) or die(mysqli_error($link));
+            
+            $_SESSION['login'] = $login;
+            $_SESSION['auth'] = true;
+    
+            $id = mysqli_insert_id($link);
+            $_SESSION['id'] = $id;
+    
+            echo $id;
+            echo "Регистрация прошла успешно";
+        } else {
+            echo "Данный логин уже занят";
+        }
 
-        $id = mysqli_insert_id($link);
-        $_SESSION['id'] = $id;
-
-        echo $id;
-        echo "Регистрация прошла успешно";
     } else {
         echo "Пароли не совпадают";
     }
