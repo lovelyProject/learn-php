@@ -1,4 +1,6 @@
 <?php 
+    session_start();
+
     if (!empty($_POST['login']) and !empty($_POST['password'])) {
         
 
@@ -12,9 +14,14 @@
 
         $login = $_POST['login'];
         $password = $_POST['password'];
-        $query = "INSERT INTO logs (login, pass) VALUES ('$login', '$password')";
+        $email = $_POST['email'];
+        $date = $_POST['date'];
+        $now = date("Y-m-d");
+        $query = "INSERT INTO logs (login, pass, email, date, created_at) VALUES ('$login', '$password', '$email', '$date', '$now')";
         mysqli_query($link, $query) or die(mysqli_error($link));
         
+        $_SESSION['login'] = $login;
+        $_SESSION['auth'] = true;
         echo "Регистрация прошла успешно";
     }
 
@@ -30,8 +37,10 @@
 </head>
 <body>
 <form action="" method="POST">
-	<input name="login" type="text">
-	<input name="password" type="password">
+	<input name="login" type="text" placeholder="login">
+	<input name="password" type="password" placeholder="password">
+    <input type="date" placeholder="дата рождения" name="date">
+    <input type="email" name="email" placeholder="email">
 	<input type="submit">
 </form>
 </body>
