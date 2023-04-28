@@ -21,7 +21,7 @@ function makeFoundation() {
 }
     if (!empty($_POST)) {
         $login = $_POST['login'];
-        $password = $_POST['pass'];
+        $password = md5($_POST['pass']);
 
         $host = "localhost";
         $user = "root";

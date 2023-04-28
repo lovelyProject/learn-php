@@ -1,7 +1,7 @@
 <?php 
     session_start();
 
-    if (!empty($_POST['login']) and !empty($_POST['password']) and strlen($_POST['login']) > 0 and preg_match("/^[a-zA-Z0-9\-_]+$/", $_POST['login'])) {
+    if (!empty($_POST['login'])) {
         if ($_POST['confirm'] === $_POST['password']) {
 
         $host = 'localhost';
@@ -20,7 +20,7 @@
         
         if (empty($user)) {
             $login = $_POST['login'];
-            $password = $_POST['password'];
+            $password = md5($_POST['password']);
             $confirm = $_POST['confirm'];
             $email = $_POST['email'];
             $date = $_POST['date'];
@@ -60,11 +60,15 @@
 </head>
 <body>
 <form action="" method="POST">
-	<input name="login" type="text" placeholder="login">
-	<input name="password" type="password" placeholder="password">
-	<input name="confirm" type="password" placeholder="confirm password">
-    <input type="date" placeholder="дата рождения" name="date">
-    <input type="email" name="email" placeholder="email">
+	<input name="login" type="text" placeholder="login" value="<?= $_POST['login'] ?>">
+	<input name="password" type="password" placeholder="password" value="<?php $_POST['password']?>">
+	<input name="confirm" type="password" placeholder="confirm password" value="<?php $_POST['password']?>">
+    <input type="date" placeholder="дата рождения" name="date" value="<?php $_POST['date']?>">
+    <input type="email" name="email" placeholder="email" value="<?php $_POST['email']?>">
+    <select name="city" id="" value="<?php $_POST['city']?>">
+        <option value="Russia">Россия</option>
+        <option value="USA">США</option>
+    </select>
 	<input type="submit">
 </form>
 </body>
