@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 16px;
+}
+*, ::after, ::before {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: Poppins, sans-serif;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+ul {
+    list-style: none;
+}
+.container {
+    max-width: 144rem;
+    margin: 0 auto;;
+}
+.registration__info {
+    max-width: 59.8rem;
+    background: url("img/registration-bg.png") 0 0 /cover no-repeat;
+}
+.registration__container {
+    display: flex;
+}
+.registration__info {
+    padding: 10rem 13.6rem 3.5rem 6.6rem;;
+}
+.registration__title {
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 6rem;
+    letter-spacing: 0.02rem;
+}
+.registration__description {
+    margin-top: 27.3rem;
+    font-size: 3.2rem;
+    font-weight: 500;
+    line-height: 4.8rem;
+}
+.registration__footer {
+    margin-top: 30rem;
+}
+.registration__footer_20 {
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 3rem;
+}
+.registration__footer_16 {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+}
+.registration__form-container {
+    padding: 0 10rem;
+
+}
+.registration__form-title {
+    font-size: 3.2rem;
+    margin-top: 20rem;
+    font-weight: 500;
+    line-height: 4.8rem;
+    color: black;
+}
+.registration__form {
+    margin-top: 6.8rem;
+}
+.registration__form-text {
+font-size: 1.6rem;
+color: #8D8D8D;
+font-weight: 300;
+line-height: 2.4rem;
+}
+.registration__form-item {
+    width: calc(100% - 1rem);
+    border: none;
+    outline: none;
+    color:black;
+    font-size: 2.4rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid black;
+}
+.registration__form-item:focus {
+    border-bottom: 1px solid #999;
+}
+.registration__list-item:not(:first-child) {
+    margin-top: 4rem;
+}
+.btn {
+    width: 100%;
+    padding: 1.8rem 0;
+    text-align: center;
+    border: none;
+    border-radius: 2rem;
+    font-size: 2rem;
+    line-height: 3rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+}
+.btn_black {
+    background-color: #000;
+    color: #fff;
+    transition: 0.1s all ease-in-out;
+}
+.btn_black:hover {
+    background-color: #000000a7;
+}
+.btn_black:active {
+    transform: translateY(0.3rem);
+}
+.btn_white {
+    border: 1px solid #999;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.btn_white:active {
+    transform: translateY(0.3rem);
+}
+.mt-70 {
+    margin-top: 70px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+
+.icon {
+    width: 2.4rem;
+    margin-right: 0.5rem;
+}
+.sign-in-container {
+    margin-top: 15.4rem;
+    text-align: center;
+}
+.black-text {
+    color: black;
+}
+.blue-text {
+    color: #3EC1F3;
+    margin-left: 0.5rem;
+    font-size: 1.8rem;
+}
