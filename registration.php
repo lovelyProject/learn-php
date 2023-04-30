@@ -1,33 +1,49 @@
 <?php
 session_start();
 
+function isNotEqual($a, $b) {
+    return $a !== $b ? false : true;
+}
+function checkLogin($login, $link) {
+    $query = "SELECT * FROM logs WHERE login='$login'";
+    $result = mysqli_query($link, $query);
+    
+    $user = mysqli_fetch_assoc($result);
+    
+    return isset($user) ? false : true;
+}
+
 if (!empty($_POST)) {
+      
     $login = $_POST['login'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm'];
-    $isError = false;
-
-    if (!isEqual($password, $confirm)) {
+    $isError = false; 
+    if (isNotEqual($password, $confirm)) {
         $isError = true;
         $passError = "Пароли не совпадают";
+        echo $passError;
     }
-
+    
     $host = "localhost";
     $user = "root";
     $pass = "root";
     $name = "exerice";
 
-    $link = mysqli_connect($host, $user, $pass, $name);
-    mysqli_query($link, "SET NAMES 'utf8");
-
+    
+    $link = mysqli_connect($host, $user, $pass, $name); 
+    mysqli_query($link, "SET NAMES 'utf8'"); 
+   
     if (!checkLogin($login, $link)) {
         $isError = true;
         $loginError = "Такой логин уже существует";
     }
+   
 
     if (!$isError) {
-        $query = "INSERT INTO logs (login, password) VALUES ('$login', '$password)";
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $query = "INSERT INTO logs (login, password) VALUES ('$login', '$')";
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
         $_SESSION['auth'] = true;
@@ -38,19 +54,7 @@ if (!empty($_POST)) {
 }
 
 
-function isEqual($a, $b) {
-    return $a === $b ? true : false;
-}
-function checkLogin($login, $link) {
-    $query = "SELECT * FROM logs WHERE login='$login'";
-    $result = mysqli_query($link, $query);
-
-    $user = mysqli_fetch_assoc($result);
-
-    return isset($user) ? false : true;
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -74,20 +78,26 @@ function checkLogin($login, $link) {
             <div class="registration__form-container">
                         <h3 class="registration__form-title">Create an account</h3>
                         <span class="registration__form-text">Let’s get started with your 30 days free trial</span>
-                        <form action="" method="post" class="registration__form">
+                        <form action="registration.php" method="POST" class="registration__form">
                             <ul>
                                 <li class="registration__list-item">
-                                    <input class="registration__form-item" type="text" value="" name="login" placeholder="login">
+                                    <input class="registration__form-item" type="text" value="<?= $_POST['login'] ?>" name="login" placeholder="login" required>
+                                </li>
+                                <?php if(!isset($loginError)): ?>
+                                    <p><?= $loginError ?></p>
+                                    <?php endif ?>
+                                    <li class="registration__list-item">
+                                    <input class="registration__form-item" type="email" value="<?= $_POST['email'] ?>" name="email" placeholder="email" required>
                                 </li>
                                 <li class="registration__list-item">
-                                    <input class="registration__form-item" type="email" value="" name="email" placeholder="email">
+                                    <input placeholder="password" name="password" class="registration__form-item" type="password" value="<?= $_POST['password'] ?>" required>
                                 </li>
                                 <li class="registration__list-item">
-                                    <input placeholder="password" name="password" class="registration__form-item" type="password" value="">
+                                    <input placeholder="confirm password" name="confirm" class="registration__form-item" type="password" value="<?= $_POST['confirm'] ?>" required>
                                 </li>
-                                <li class="registration__list-item">
-                                    <input placeholder="confirm password" name="confirm" class="registration__form-item" type="password" value="">
-                                </li>
+                                <?php if(!isset($passError)): ?>
+                                    <p><?= $passError ?></p>
+                                    <?php endif ?>
                             </ul>
                             <button type="submit" class="btn btn_black mt-70">Create account</button>
                         </form>
