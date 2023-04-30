@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 html {
-    font-size: 10px;
+    font-size: 58.5%;
 }
 body {
     font-size: 16px;
@@ -137,7 +137,7 @@ line-height: 2.4rem;
     margin-right: 0.5rem;
 }
 .sign-in-container {
-    margin-top: 15.4rem;
+    margin-top: 9.4rem;
     text-align: center;
 }
 .black-text {
