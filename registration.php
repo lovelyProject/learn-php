@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-function isNotEqual($a, $b) {
-    return $a !== $b ? false : true;
-}
-function checkLogin($login, $link) {
-    $query = "SELECT * FROM logs WHERE login='$login'";
-    $result = mysqli_query($link, $query);
+// function isNotEqual($a, $b) {
+//     return $a !== $b ? false : true;
+// }
+// function checkLogin($login, $link) {
+//     $query = "SELECT * FROM logs WHERE login='$login'";
+//     $result = mysqli_query($link, $query);
     
-    $user = mysqli_fetch_assoc($result);
+//     $user = mysqli_fetch_assoc($result);
     
-    return isset($user) ? false : true;
-}
+//     return isset($user) ? false : true;
+// }
 
 if (!empty($_POST)) {
       
@@ -19,12 +19,11 @@ if (!empty($_POST)) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm'];
-    $isError = false; 
-    if (isNotEqual($password, $confirm)) {
-        $isError = true;
-        $passError = "Пароли не совпадают";
-        echo $passError;
-    }
+    // if (isNotEqual($password, $confirm)) {
+    //     $isError = true;
+    //     $passError = "Пароли не совпадают";
+    //     echo $passError;
+    // }
     
     $host = "localhost";
     $user = "root";
@@ -35,22 +34,21 @@ if (!empty($_POST)) {
     $link = mysqli_connect($host, $user, $pass, $name); 
     mysqli_query($link, "SET NAMES 'utf8'"); 
    
-    if (!checkLogin($login, $link)) {
-        $isError = true;
-        $loginError = "Такой логин уже существует";
-    }
+    // if (!checkLogin($login, $link)) {
+    //     $isError = true;
+    //     $loginError = "Такой логин уже существует";
+    // }
    
 
-    if (!$isError) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO logs (login, password) VALUES ('$login', '$')";
-        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        $query = "INSERT INTO logs (login, password) VALUES ('$login', '$hashed_password')";
 
+        
         $_SESSION['auth'] = true;
-        $_SESSION['login'] = $login;
+        $_SESSION['login'] = $login;        
+
 
         header("Location: index.php");
-    }
 }
 
 
@@ -83,9 +81,6 @@ if (!empty($_POST)) {
                                 <li class="registration__list-item">
                                     <input class="registration__form-item" type="text" value="<?= $_POST['login'] ?>" name="login" placeholder="login" required>
                                 </li>
-                                <?php if(!isset($loginError)): ?>
-                                    <p><?= $loginError ?></p>
-                                    <?php endif ?>
                                     <li class="registration__list-item">
                                     <input class="registration__form-item" type="email" value="<?= $_POST['email'] ?>" name="email" placeholder="email" required>
                                 </li>
@@ -95,9 +90,7 @@ if (!empty($_POST)) {
                                 <li class="registration__list-item">
                                     <input placeholder="confirm password" name="confirm" class="registration__form-item" type="password" value="<?= $_POST['confirm'] ?>" required>
                                 </li>
-                                <?php if(!isset($passError)): ?>
-                                    <p><?= $passError ?></p>
-                                    <?php endif ?>
+
                             </ul>
                             <button type="submit" class="btn btn_black mt-70">Create account</button>
                         </form>
