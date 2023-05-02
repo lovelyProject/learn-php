@@ -1,26 +1,18 @@
 <?php 
+$link = require './connect.php';
 $url = $_SERVER['REQUEST_URI'];
-$titles  = require "titles.php";
-if ($url === "/page2") {
-    $url = "/dir/page2";
-} else if ($url === "/page3") {
-    $url = "/dir/sub/page3";
-}
-$title = $titles[$url];
+// echo $url . "<br />";
+preg_match('#/page(\d+)#', $url, $match);
 
+$id = $match[1];
+// echo $id;
+$query = "SELECT * FROM pages WHERE id = '$id'";
+$result = mysqli_query($link, $query) or die(mysqli_error($link));
+$page = mysqli_fetch_assoc($result);
+$layout = file_get_contents('layout.php');
 
-$layout = file_get_contents("layout.php");
-$path = "view" . $url . ".php";
+$layout = str_replace("{{ title }}", $page['title'], $layout);
+$layout = str_replace("{{ content }}", $page['content'], $layout);
 
-if(file_exists($path)) {
-    $content = file_get_contents($path);
-    $layout = str_replace("{{ content }}", $content, $layout);
-    $layout = str_replace("{{ title }}", $title, $layout);
-
-    echo $layout;
-} else { 
-    header('HTTP/1.0 404 Not Found');
-    $content = file_get_contents("view/404.php");
-}   
-echo $content;
+echo $layout;
 ?>
