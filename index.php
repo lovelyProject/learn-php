@@ -10,26 +10,17 @@ $title = $titles[$url];
 
 
 $layout = file_get_contents("layout.php");
-$content = file_get_contents("view/" . $url . ".php");
+$path = "view" . $url . ".php";
 
-$layout = str_replace("{{ content }}", $content, $layout);
-$layout = str_replace("{{ title }}", $title, $layout);
+if(file_exists($path)) {
+    $content = file_get_contents($path);
+    $layout = str_replace("{{ content }}", $content, $layout);
+    $layout = str_replace("{{ title }}", $title, $layout);
 
-echo $layout;
+    echo $layout;
+} else { 
+    header('HTTP/1.0 404 Not Found');
+    $content = file_get_contents("view/404.php");
+}   
+echo $content;
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <h2>Welcome to profile <?= $_SESSION['login']?></h2>
-    <form action="" method="POST">
-        <input type="text" name="login" value="<?= $_SESSION['login']?>">
-        <button type="submit">Изменить</button>
-    </form>
-</body>
-</html>
