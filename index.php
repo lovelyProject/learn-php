@@ -1,6 +1,18 @@
 <?php 
 $url = $_SERVER['REQUEST_URI'];
 echo $url;
+
+if ($url === "/page2") {
+    $url = "/dir/page2";
+} else if ($url === "/page3") {
+    $url = "/dir/sub/page3";
+}
+$layout = file_get_contents("layout.php");
+$content = file_get_contents("view/" . $url . ".php");
+
+$layout = str_replace("{{ content }}", $content, $layout);
+
+echo $layout;
 ?>
 <!DOCTYPE html>
 <html lang="en">
