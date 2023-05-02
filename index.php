@@ -1,16 +1,19 @@
 <?php 
 $url = $_SERVER['REQUEST_URI'];
-echo $url;
-
+$titles  = require "titles.php";
 if ($url === "/page2") {
     $url = "/dir/page2";
 } else if ($url === "/page3") {
     $url = "/dir/sub/page3";
 }
+$title = $titles[$url];
+
+
 $layout = file_get_contents("layout.php");
 $content = file_get_contents("view/" . $url . ".php");
 
 $layout = str_replace("{{ content }}", $content, $layout);
+$layout = str_replace("{{ title }}", $title, $layout);
 
 echo $layout;
 ?>
