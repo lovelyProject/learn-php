@@ -5,19 +5,30 @@ $layout = file_get_contents("./layout.php");
 $url = $_SERVER['REQUEST_URI'];
 // echo $url;
 
-  if (preg_match("#/page/all#", $url, $params)) {
-    $page = include "view/page/all.php";
+// $route = '/page/(?<catSlug>[a-z0-9_-]+)/(?<pageSlug>[a-z0-9_-]+)';
+// if (preg_match("#$route#", $url, $params)) {
+//     $page = include 'view/page/show.php';
+
+//     echo "first";
+// };
+
+$route = '/page/(?<catSlug>[a-z0-9_-]+)';
+if (preg_match("#$route#", $url, $params)) {
+    $page = include 'view/page/category.php';
+
+    echo "second";
+
+};
+
+$route = '/';
+if (preg_match("#$route#", $url, $params)) {
+    $page = include 'view/page/all.php';
     
-    $layout = str_replace("{{ content }}", $page['content'], $layout);
-    $layout = str_replace("{{ title }}", $page['title'], $layout);
-    echo $layout;
-} else if (preg_match("#/page/(?<slug>[a-zA-Z0-9-_]+)#", $url, $params)) {
-    $page = include "view/page/show.php";
+    $layout = preg_replace("{{{ content }}}", $page['content'], $layout);
+    $layout = preg_replace("{{{ title }}}", $page['title'], $layout);
 
-    $layout = str_replace("{{ content }}", $page['content'], $layout);
-    $layout = str_replace("{{ title }}", $page['title'], $layout);
+    echo  $layout;
+};
 
-    echo $layout;
-}
 ?>
 

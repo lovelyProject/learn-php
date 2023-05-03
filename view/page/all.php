@@ -2,24 +2,18 @@
 $path =  $_SERVER['DOCUMENT_ROOT'] . "/connect.php";
 $link = require $path;
 
-$query = "SELECT * FROM users";
+$query = "SELECT * FROM category";
 
-$result = mysqli_query($link, $query);
-for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
-
-$content = "";
-
-foreach ($data as $page) {
-    $content .= "
-    <div>
-        <a href='/page/$page[id]'>$page[name] $page[surname]</a>
-    </div>
-    ";
+$result = mysqli_query($link, $query) or die(mysqli_error($link));
+$content = "<ul>";
+for ($pages = []; $page = mysqli_fetch_assoc($result); $pages[] = $page) {
+    $content .= "<li><a href='page/$page[slug]'>$page[name]</a></li>";
 };
+$content .= "</ul>";
 
 $page = [
-    "content" => "<h2>Список всех пользователей</h2>" . $content,
-    "title" => "Список всех страниц"
+    "content" => $content,
+    "title" => "Все категории"
 ];
 
 return $page;
