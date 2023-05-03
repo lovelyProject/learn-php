@@ -3,9 +3,9 @@ $path =  $_SERVER['DOCUMENT_ROOT'] . "/connect.php";
 $link = require $path;
 
 $url = $_SERVER['REQUEST_URI'];
-preg_match("#/page/([\d]+)#", $url, $match);
+preg_match("#/page/(?<slug>[\d]+)#", $url, $match);
 
-$id = $match[1];
+$id = $match['slug'];
 $query = "SELECT * FROM users WHERE id = $id";
 $result = mysqli_query($link, $query) or die(mysqli_error($link));
 $user = mysqli_fetch_assoc($result);

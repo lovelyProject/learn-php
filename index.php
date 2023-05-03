@@ -11,7 +11,7 @@ $url = $_SERVER['REQUEST_URI'];
     $layout = str_replace("{{ content }}", $page['content'], $layout);
     $layout = str_replace("{{ title }}", $page['title'], $layout);
     echo $layout;
-} else if (preg_match("#/page/([a-zA-Z0-9-_]+)#", $url, $params)) {
+} else if (preg_match("#/page/(?<slug>[a-zA-Z0-9-_]+)#", $url, $params)) {
     $page = include "view/page/show.php";
 
     $layout = str_replace("{{ content }}", $page['content'], $layout);
