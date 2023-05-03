@@ -18,7 +18,7 @@ foreach ($data as $page) {
 };
 
 $page = [
-    "content" => $content,
+    "content" => "<h2>Список всех пользователей</h2>" . $content,
     "title" => "Список всех страниц"
 ];
 
