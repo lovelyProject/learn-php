@@ -1,15 +1,15 @@
 <?php 
-	$json = '{
-		"user": {
-			"name": "john",
-			"surn": "smit"
-		},
-		"city": "London"
-	}';
+$url = 'http://learn-php/test.loc';
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, $url);
 
-    $data = json_decode($json);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-    echo $data->user->name;
-    echo $data->user->surn;
-    echo $data->city;
+$res = curl_exec($curl);
+
+if ($res === false) {
+    echo curl_error($curl);
+} else {
+    var_dump($res);
+}
 ?>
