@@ -1,6 +1,10 @@
 <?php
-	if (isset($_GET['num1']) and isset($_GET['num2'])) {
-        echo $_GET['num1'] + $_GET['num2'];
+	if (isset($_GET['day1']) and isset($_GET['day2'])) {
+        $day1 = date_create($_GET['day1']);
+        $day2 = date_create($_GET['day2']);
+
+        $diff = date_diff($day1, $day2);
+        echo $diff->format('%a');
     } else {
         echo "there is not date";
     }

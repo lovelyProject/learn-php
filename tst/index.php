@@ -1,8 +1,8 @@
 <?php
-	$num1 = 5;
-	$num2 = 3;
+	$day1 = "2023-05-04";
+	$day2 = "2023-05-06";
 
-	$basePath = "http://learn-php/api/index.php?num1=$num1&num2=$num2";
+	$basePath = "http://learn-php/api/index.php?day1=$day1&day2=$day2";
 
 	$res = file_get_contents($basePath);
 	echo $res;
