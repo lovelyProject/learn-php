@@ -1,5 +1,7 @@
 <?php
-	$today = date("Y-m-d H:i:s");
-
-    echo $today;
+	if (isset($_GET['num1']) and isset($_GET['num2'])) {
+        echo $_GET['num1'] + $_GET['num2'];
+    } else {
+        echo "there is not date";
+    }
 ?>
