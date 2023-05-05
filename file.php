@@ -1,14 +1,22 @@
 <?php 
-	$link = require "./connect.php";
-	if (!empty($_GET) and isset($_GET['id'])) {
-		$id = $_GET['id'];
+	header("Content-Type: application/json");
 
-		$query  = "SELECT * FROM authors WHERE id = '$id'";
-		$res = mysqli_query($link, $query) or die(mysqli_error($link));
-		$user = mysqli_fetch_array($res);
+	$token = "12345";
+	
+	function checkDateFormat($date) {
+		return preg_match("#[0-9]{4}-[0-9]{2}-[0-9]{2}#", $date);
+	}
+	if (isset($_POST['birthday']) and $_POST['token'] === $token) {
+		if (checkDateformat($_POST['birthday'])) {
+			$birthday = date_create($_POST['birthday']);
+			$today = date_create((date('Y-m-d')));
+			$diff = date_diff($birthday, $today);
 
-		echo json_encode($user['Name_author']);
+			echo json_encode($diff->format("%a дня(дней)"));
+		} else {
+			echo json_encode("Incorrect date format");
+		}
 	} else {
-		echo 'no data';
+		echo json_encode("Incorrect token");
 	}
 ?>
