@@ -1,18 +1,12 @@
 <?php 
-$url = 'http://learn-php/file.php';
+$url = 'http://learn-php/file.php?id=2';
 
 $curl = curl_init();
+
 curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 
-$arr = [1,2,3,4,5];
-$json = json_encode($arr);
-$data = ['json' => $json];
+$res = curl_exec($curl);
 
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-$answer = curl_exec($curl);
-
-var_dump($answer);
+echo json_decode($res);
 ?>

@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $password = "root";
-$name = "pages";
+$name = "test";
 
 $link = mysqli_connect($host, $user, $password, $name);
 mysqli_query($link, "SET NAMES 'utf8'");
